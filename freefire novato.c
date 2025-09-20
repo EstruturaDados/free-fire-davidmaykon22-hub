@@ -39,3 +39,88 @@ do {
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         getchar(); // Consumir o '\n' deixado pelo scanf
+
+         switch(opcao) {
+            case 1:
+                inserirItem(mochila, &qtde);
+                listarItens(mochila, qtde);
+                break;
+            case 2:
+                removerItem(mochila, &qtde);
+                listarItens(mochila, qtde);
+                break;
+            case 3:
+                listarItens(mochila, qtde);
+                break;
+            case 4:
+                buscarItem(mochila, qtde);
+                break;
+            case 0:
+                printf("Encerrando o sistema...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+
+    } while(opcao != 0);
+
+    return 0;
+}
+
+void inserirItem(Item mochila[], int *qtde) {
+    if (*qtde >= MAX_ITENS) {
+        printf("A mochila esta cheia! Nao e possivel adicionar mais itens.\n");
+        return;
+    }
+
+    Item novo;
+    printf("Digite o nome do item: ");
+    fgets(novo.nome, sizeof(novo.nome), stdin);
+    novo.nome[strcspn(novo.nome, "\n")] = '\0'; // Remove o \n do fgets
+
+    printf("Digite o tipo do item (arma, municao, cura...): ");
+    fgets(novo.tipo, sizeof(novo.tipo), stdin);
+    novo.tipo[strcspn(novo.tipo, "\n")] = '\0';
+
+    printf("Digite a quantidade: ");
+    scanf("%d", &novo.quantidade);
+    getchar();
+
+    mochila[*qtde] = novo;
+    (*qtde)++;
+
+    printf("Item adicionado com sucesso!\n");
+}
+// Remover |Item
+void removerItem(Item mochila[], int *qtde) {
+    if (*qtde == 0) {
+        printf("A mochila esta vazia! Nenhum item para remover.\n");
+        return;
+    }
+
+    char nomeRemover[30];
+    printf("Digite o nome do item a ser removido: ");
+    fgets(nomeRemover, sizeof(nomeRemover), stdin);
+    nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+
+    int encontrado = -1;
+    for (int i = 0; i < *qtde; i++) {
+        if (strcmp(mochila[i].nome, nomeRemover) == 0) {
+            encontrado = i;
+            break;
+        }
+    }
+
+    if (encontrado == -1) {
+        printf("Item nao encontrado!\n");
+        return;
+    }
+
+    // Desloca os itens seguintes para preencher a lacuna
+    for (int i = encontrado; i < *qtde - 1; i++) {
+        mochila[i] = mochila[i + 1];
+    }
+
+    (*qtde)--;
+    printf("Item removido com sucesso!\n");
+}
