@@ -14,3 +14,7 @@ typedef struct {
     int quantidade;    // Quantidade de itens
 
 } Item;
+
+// Vetor global que armazena os itens
+Item mochila[MAX_ITENS];
+int qtdItens = 0; // Quantidade atual de itens cadastrados
