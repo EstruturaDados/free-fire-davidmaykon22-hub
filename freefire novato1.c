@@ -91,3 +91,38 @@ void inserirItem(Item mochila[], int *qtde) {
     (*qtde)++;
 
     printf("Item adicionado com sucesso!\n");
+
+    }
+
+     // Remover |Item
+     void removerItem(Item mochila[], int *qtde) {
+     if (*qtde == 0) {
+        printf("A mochila esta vazia! Nenhum item para remover.\n");
+        return;
+    }
+
+     char nomeRemover[30];
+     printf("Digite o nome do item a ser removido: ");
+     fgets(nomeRemover, sizeof(nomeRemover), stdin);
+     nomeRemover[strcspn(nomeRemover, "\n")] = '\0';
+
+     int encontrado = -1;
+     for (int i = 0; i < *qtde; i++) {
+        if (strcmp(mochila[i].nome, nomeRemover) == 0) {
+            encontrado = i;
+            break;
+        }
+    }
+
+    if (encontrado == -1) {
+        printf("Item nao encontrado!\n");
+        return;
+    }
+
+    // Desloca os itens seguintes para preencher a lacuna
+    for (int i = encontrado; i < *qtde - 1; i++) {
+        mochila[i] = mochila[i + 1];
+    }
+
+    (*qtde)--;
+    printf("Item removido com sucesso!\n");
