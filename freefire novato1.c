@@ -126,3 +126,44 @@ void inserirItem(Item mochila[], int *qtde) {
 
     (*qtde)--;
     printf("Item removido com sucesso!\n");
+
+    }
+
+     // listar Item
+     void listarItens(Item mochila[], int qtde) {
+     if (qtde == 0) {
+        printf("A mochila esta vazia.\n");
+        return;
+    }
+
+    printf("\n--- Itens na Mochila ---\n");
+    for (int i = 0; i < qtde; i++) {
+        printf("Nome: %s | Tipo: %s | Quantidade: %d\n",
+               mochila[i].nome, mochila[i].tipo, mochila[i].quantidade);
+    }
+    printf("-------------------------\n");
+}
+
+// Busca por nome do item
+void buscarItem(Item mochila[], int qtde) {
+    if (qtde == 0) {
+        printf("A mochila esta vazia.\n");
+        return;
+    }
+
+    char nomeBuscar[30];
+    printf("Digite o nome do item que deseja buscar: ");
+    fgets(nomeBuscar, sizeof(nomeBuscar), stdin);
+    nomeBuscar[strcspn(nomeBuscar, "\n")] = '\0';
+
+    for (int i = 0; i < qtde; i++) {
+        if (strcmp(mochila[i].nome, nomeBuscar) == 0) {
+            printf("Item encontrado!\n");
+            printf("Nome: %s | Tipo: %s | Quantidade: %d\n",
+                   mochila[i].nome, mochila[i].tipo, mochila[i].quantidade);
+            return;
+        }
+    }
+
+    printf("Item nao encontrado na mochila.\n");
+}
