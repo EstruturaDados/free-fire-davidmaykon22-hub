@@ -68,3 +68,26 @@ do {
 
     return 0;
 }
+void inserirItem(Item mochila[], int *qtde) {
+    if (*qtde >= MAX_ITENS) {
+        printf("A mochila esta cheia! Nao e possivel adicionar mais itens.\n");
+        return;
+    }
+
+    Item novo;
+    printf("Digite o nome do item: ");
+    fgets(novo.nome, sizeof(novo.nome), stdin);
+    novo.nome[strcspn(novo.nome, "\n")] = '\0'; // Remove o \n do fgets
+
+    printf("Digite o tipo do item (arma, municao, cura...): ");
+    fgets(novo.tipo, sizeof(novo.tipo), stdin);
+    novo.tipo[strcspn(novo.tipo, "\n")] = '\0';
+
+    printf("Digite a quantidade: ");
+    scanf("%d", &novo.quantidade);
+    getchar();
+
+    mochila[*qtde] = novo;
+    (*qtde)++;
+
+    printf("Item adicionado com sucesso!\n");
