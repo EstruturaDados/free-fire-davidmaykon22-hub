@@ -16,3 +16,18 @@ typedef struct {
     int prioridade;
 
 } Item;
+
+// Funções do sistema
+void inserirItem(Item mochila[], int *contador);
+void listarItens(Item mochila[], int contador);
+void removerItem(Item mochila[], int *contador);
+void buscarItem(Item mochila[], int contador);
+void pausar();
+
+// Vetor global que armazena os itens
+int main() {
+Item mochila[MAX_ITENS];
+int qtde = 0; // Quantidade atual de itens na mochila
+int opcao;
+
+do {
