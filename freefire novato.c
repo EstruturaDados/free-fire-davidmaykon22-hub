@@ -10,9 +10,9 @@
 //======================================
 
 typedef struct {
-    char nome[30];         // Nome do item
-    char tipo[20];     //Tipo do item ex
-    int quantidade;    // Quantidade de itens
+    char nome[30];       //Nome do item
+    char tipo[20];       //Tipo do item ex
+    int quantidade;      //Quantidade de itens
     int prioridade;
 
 } Item;
